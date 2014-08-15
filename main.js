@@ -5,7 +5,7 @@
 
 		$scope.isLoading = false;
 		$scope.$strage = $localStorage;
-		$scope.targetUrl = $scope.$strage.targetUrl || 'about:blank';
+		$scope.targetUrl = $scope.$strage.targetUrl || 'http://tom.mgzl.jp/';
 		$scope.bookmarksPages = [];
 		if(!angular.isUndefined($scope.$strage.bookmarksPages)){
 			$scope.bookmarksPages = JSON.parse($scope.$strage.bookmarksPages);
