@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">  
-	<title></title>
+	<title>Tower of Metab</title>
 	<link rel="stylesheet" href="style.css">
 	<script src="bower_components/jquery/dist/jquery.min.js"></script>
 	<script src="bower_components/angular/angular.min.js"></script>
@@ -17,17 +17,25 @@
 		<div class="page-header pageHeader">
 			<div class="row">
 				<div class="col-sm-6">
-					<h1>Tower of Metab <small>{{bookmarksSum}}m<sup>2</sup> {{bookmarksPages.length}}階建て</small></h1>
+					<h1>Tower of Metab <small>延床面積{{bookmarksSum}}m<sup>2</sup> {{bookmarksPages.length}}階建て</small></h1>
 				</div>
-				<div class="col-sm-4 vaBottom">
-					<input class="form-control" type="text" ng-model="targetUrl">
+				<div ng-class="isNotLoadingClass" class="col-sm-4 vaBottom">
+					<input ng-model="targetUrl" ng-keyup="keyup($event)" id="js-targetInput" class="form-control" type="text">
 				</div>
-				<div class="col-sm-2 vaBottom">
-					<button ng-click="climb()" class="btn btn-primary submitBtn">タワーを登る</button>
+				<div ng-class="isNotLoadingClass" class="col-sm-2 vaBottom">
+					<button id="js-submitBtn" ng-click="climb()" class="btn btn-primary submitBtn">メタブタワーを登る</button>
+				</div>
+				<div ng-class="isLoadingClass" class="col-sm-6">
+					<div class="loadingText">
+						メタブタワーの頂を目指しています。
+					</div>
 				</div>
 			</div>
 		</div>
 
+		<div ng-if="bookmarksPages.length === 12" class="panel panel-primary topOfTower">
+			<div class="panel-heading text-center"><a href="http://b.hatena.ne.jp/entry/b.hatena.ne.jp/entry/b.hatena.ne.jp/entry/b.hatena.ne.jp/entry/b.hatena.ne.jp/entry/b.hatena.ne.jp/entry/b.hatena.ne.jp/entry/b.hatena.ne.jp/entry/b.hatena.ne.jp/entry/b.hatena.ne.jp/entry/b.hatena.ne.jp/entry/b.hatena.ne.jp/entry/b.hatena.ne.jp/en" target="_blank">頂上へ</a></div>
+		</div>
 		<div ng-if="bookmarksPages.length" class="panel panel-primary">
 			<div ng-repeat-start="data in bookmarksPages" class="panel-heading"><a href="{{data.entry_url}}" target="_blank">{{data.title}}</a><span class="badge pull-right">{{data.count}}</span></div>
 			<table ng-repeat-end class="table table-condensed bookmarkTable">
