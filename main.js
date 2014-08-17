@@ -4,7 +4,7 @@
 	towerOfMetabApp.controller('MainCtrl', ['$scope', '$http', '$q', '$localStorage', '$sessionStorage', function($scope, $http, $q, $localStorage, $sessionStorage){
 
 		$scope.isLoading = false;
-		$scope.$strage = $localStorage;
+		$scope.$strage = $sessionStorage;
 		$scope.targetUrl = $scope.$strage.targetUrl || 'http://tom.mgzl.jp/';
 		$scope.bookmarksPages = [];
 		if(!angular.isUndefined($scope.$strage.bookmarksPages)){
