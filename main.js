@@ -3,9 +3,19 @@
 	var towerOfMetabApp = angular.module('towerOfMetabApp', ['ngStorage']);
 	towerOfMetabApp.controller('MainCtrl', ['$scope', '$http', '$q', '$localStorage', '$sessionStorage', function($scope, $http, $q, $localStorage, $sessionStorage){
 
+		var query = (function(){
+			var queryArray = location.search.replace(/^\?/, '').split('&');
+			var result = {};
+			var i = 0, length = queryArray.length;
+			for(;i < length; i++){
+				var param = queryArray[i].split('=');
+				result[param[0]] = param[1];
+			}
+			return result;
+		})();
 		$scope.isLoading = false;
 		$scope.$strage = $sessionStorage;
-		$scope.targetUrl = $scope.$strage.targetUrl || 'http://tom.mgzl.jp/';
+		$scope.targetUrl = query.url || 'http://tom.mgzl.jp/';
 		$scope.bookmarksPages = [];
 		if(!angular.isUndefined($scope.$strage.bookmarksPages)){
 			$scope.bookmarksPages = JSON.parse($scope.$strage.bookmarksPages);
@@ -25,6 +35,11 @@
 			$scope.isLoading = true;
 			$scope.isLoadingClass = '';
 			$scope.isNotLoadingClass = 'hidden';
+
+			var locationSearch = '?url=' + $scope.targetUrl;
+			if(locationSearch !== location.search){
+				location.search = '?url=' + $scope.targetUrl;
+			}
 			(function loop(url){
 				$http
 					.jsonp('http://api.b.st-hatena.com/entry/jsonlite/', {
@@ -64,5 +79,9 @@
 				$scope.climb();
 			}
 		};
+
+		if(typeof query.url !== 'undefined'){
+			$scope.climb();
+		}
 	}]);
 })(this, jQuery, angular);
