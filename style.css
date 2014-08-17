@@ -3821,7 +3821,7 @@ a.list-group-item-danger.active:focus {
   background-color: #d9edf7;
 }
 .bookmarkTable th {
-  min-width: 100px;
+  width: 100px;
   white-space: nowrap;
 }
 .bookmarkTable td {
