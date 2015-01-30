@@ -1,6 +1,6 @@
 (function(window, $, angular, undefined){
 	"use strict";
-	var towerOfMetabApp = angular.module('towerOfMetabApp', ['ngStorage']);
+	var towerOfMetabApp = angular.module('towerOfMetabApp', ['ngStorage', 'ngSanitize']);
 	towerOfMetabApp.controller('MainCtrl', ['$scope', '$http', '$q', '$localStorage', '$sessionStorage', function($scope, $http, $q, $localStorage, $sessionStorage){
 
 		var query = (function(){
@@ -53,6 +53,10 @@
 						if(data !== null && $scope.bookmarksPages.length < 12){
 							$scope.bookmarksPages.unshift(data);
 							$scope.bookmarksSum += parseFloat(data.count);
+							$.each(data.bookmarks, function (i, bookmark) {
+								bookmark.comment = idCallToLink(bookmark.comment);
+								console.log(bookmark.comment);
+							});
 							loop(data.entry_url);
 						}else{
 							$scope.$strage.bookmarksPages = JSON.stringify($scope.bookmarksPages);
@@ -79,6 +83,10 @@
 				$scope.climb();
 			}
 		};
+
+		function idCallToLink(text) {
+			return text.replace(/((?:id|ID)\:([a-zA-Z][a-zA-Z0-9_-]{1,30}[a-zA-Z0-9]))/g, '<a href="http://b.hatena.ne.jp/$2/" target="_blank">$1</a>');
+		}
 
 		if(typeof query.url !== 'undefined'){
 			$scope.climb();

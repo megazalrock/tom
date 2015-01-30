@@ -9,6 +9,7 @@
 	<script src="ga.js"></script>
 	<script src="bower_components/jquery/dist/jquery.min.js"></script>
 	<script src="bower_components/angular/angular.min.js"></script>
+	<script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
 	<script src="bower_components/ngstorage/ngStorage.min.js"></script>
 	<script type="text/javascript" src="main.js"></script>
 </head>
@@ -46,7 +47,7 @@
 						</th>
 						<td>
 							<ul class="list-inline">
-								<li>{{bookmark.comment}}</li>
+								<li ng-bind-html="bookmark.comment"></li>
 								<li class="small"><a href="http://b.hatena.ne.jp/{{bookmark.user}}/{{getDate(bookmark.timestamp)}}#bookmark-{{data.eid}}" target="_blank"><time datetime="{{bookmark.timestamp}}">{{bookmark.timestamp}}</time></a></li>
 								<li class="small"><a href="http://b.hatena.ne.jp/entry/{{data.eid}}/comment/{{bookmark.user}}" target="_blank"><span class="glyphicon glyphicon-link" title="パーマリンク"></span></a></li>
 							</ul>
