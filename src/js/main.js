@@ -8,6 +8,7 @@ import Footer from './components/Footer.js';
 import Top from './components/top/Top.js';
 import About from './components/about/About.js';
 
+
 class App extends React.Component{
 	constructor(props){
 		super(props);
