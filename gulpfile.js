@@ -25,8 +25,6 @@ var runSequence = require('run-sequence');
 var notifier = require('node-notifier');
 var notify = require('gulp-notify');
 
-var mocha = require('gulp-mocha');
-
 var dirnameRegExp = new RegExp(__dirname + '/', 'g');
 
 var FilePath = function(dir, filename){
@@ -213,27 +211,8 @@ gulp.task('build', function (callback) {
 	);
 });
 
-gulp.task('test', function (callback) {
-	return gulp.src(['test/*.js'], {read: false})
-		.pipe(
-			mocha({
-				reporter : 'list'
-			})
-		)
-		.on('error', function (e) {
-			notifier.notify({
-				title : 'test failed !!!',
-				message : e.message,
-				icon: 'node_modules/gulp-notify/assets/gulp-error.png'
-			}, function (err) {
-				console.log(err);
-			});
-		});
-});
-
-gulp.task('watch', ['watchify', 'less', 'test'] , function () {
+gulp.task('watch', ['watchify', 'less'] , function () {
 	gulp.watch([less.src.dir + '*.less'], ['less']);
-	gulp.watch(['test/*.js'], ['test']);
 });
 
 gulp.task('default', ['watch']);
