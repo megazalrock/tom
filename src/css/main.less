@@ -1,0 +1,316 @@
+@import "reset";
+
+@baseFontSize: 16px;
+@baseMargin: @baseFontSize;
+@baseColor: #010101;
+
+@fontSizeNormal: @baseFontSize;
+@fontSizeSmall: @fontSizeNormal * 0.75;
+@fontSizeLarge: @fontSizeNormal * 1.25;
+
+@baseBorderStyle: 1px solid #CCC;
+
+@hatenaColor: #008ede;
+@hatenaLinkColor: #008FDE;
+@bookmarkCountBg: #FDD;
+@bookmarkCountColor: #F00;
+
+@bookmarkCountHoverColor: #FF7790;
+@titleHoverColor: #7DB4E8;
+
+.textOutline(@width, @color, @bulr: 0px){
+	text-shadow: @width 0 @bulr @color, -@width 0 @bulr @color, 0 @width @bulr @color, 0 -@width @bulr @color;
+}
+
+.btn(){	
+	appearance: none;
+	color: #FFF;
+	background: @hatenaColor;
+	width: 100%;
+	height: 100%;
+	border: none;
+	padding: 0;
+	margin: 0;
+	border-radius: 0;
+	&:active{
+		background: lighten(@hatenaColor, 20%);
+	}
+}
+
+body, html{
+	font-size: @baseFontSize;
+	color: @baseColor;
+}
+
+a{
+	color: @hatenaLinkColor;
+}
+
+#container{
+	min-width: 320px;
+}
+
+.globalHeader{
+	display: flex;
+	align-items: flex-end;
+	margin: @baseMargin * 2 0;
+	font-size: @fontSizeLarge;
+	flex-wrap: wrap;
+	h1{
+		margin-right: auto;
+		line-height: 1;
+	}
+	.description{
+		font-size: @fontSizeSmall;
+		margin-left: 1em;
+	}
+	.menu{
+		font-size: @fontSizeSmall;
+		margin-top: @baseMargin / 4;
+		a{
+			vertical-align: middle;
+			text-decoration: none;
+			&:hover{
+				text-decoration: underline;
+			}
+		}
+	}
+}
+
+.globalFooter{
+	margin-top: @baseMargin;
+	font-size: @fontSizeSmall;
+	text-align: center;
+	color: #999;
+}
+
+.main{
+	padding: 0 @baseMargin;
+	.inputBox{
+		&.loading{
+			.urlInput{
+				.inputSubmitBox{
+					input{
+						background: #CCC;
+					}
+				}
+			}
+		}
+		.urlInput{
+			@btnWidth: 64px;
+			//padding: 5px;
+			border: @baseBorderStyle;
+			font-size: @fontSizeSmall;
+			line-height: 1;
+			span{
+				border: none;
+				box-sizing: border-box;
+				height: 2em;
+				display: inline-block;
+				vertical-align: middle;
+				&.inputTextBox{
+					width: 100%;
+					padding-right: @btnWidth;
+					margin-right: -@btnWidth;
+					overflow: hidden;
+					input{
+						//background: #CCC;
+						box-sizing: border-box;
+						padding: 0;
+						width: 100%;
+						padding: 0 5px;
+						height: 100%;
+						border: none;
+						&.disabled{
+							background: #CCC;
+						}
+					}
+				}
+				&.inputSubmitBox{
+					width: @btnWidth;
+					input{
+						.btn();
+					}
+				}
+			}
+			
+		}
+		.modeInput{
+			margin-top: @baseMargin / 2 - (@fontSizeSmall / 2);
+			font-size: @fontSizeSmall;
+			line-height: 2;
+			label{
+				cursor: pointer;
+				margin-right: 1em;
+				display: inline-block;
+				input{
+					margin-right: 0.25em;
+					vertical-align: middle;
+				}
+				&:last-child{
+					margin-right: 0;
+				}
+			}
+		}
+	}
+	.resultView{
+		h2{
+			display:flex;
+			margin-bottom: @baseMargin;
+			align-items: center;
+			.bookmarkCount,
+			.title{
+				line-height: 1;
+				display: block;
+				text-decoration: none;
+				margin-top: @baseMargin;
+			}
+			.bookmarkCount{
+				color: #F00;
+				text-align: center;
+				margin: @baseMargin + @fontSizeLarge * 0.25 @baseMargin 0 0;
+				&:hover{
+					color: lighten(#F00, 25%);
+				}
+				span{
+					display: block;
+				}
+				.count{
+					font-size: 24px;
+				}
+				.users{
+					font-size: 12px;
+					margin-top: @baseMargin / 2;
+				}
+			}
+			.title{
+				flex: 1 0 auto;
+				line-height: 1.5;
+				font-size: @fontSizeLarge;
+				color: @baseColor;
+				&:hover{
+					color: @titleHoverColor;
+				}
+			}
+		}
+		.area{
+			text-align: right;
+			background: #666;
+			font-size: @fontSizeSmall;
+			color: #FFF;
+			padding-right: 1em;
+			line-height: 1;
+			padding: @baseMargin / 4 @baseMargin / 2;
+		}
+		.floors{
+			border-right: 1px solid @hatenaColor;
+			border-left: 1px solid @hatenaColor;
+			border-bottom: 1px solid @hatenaColor;
+			.floor{
+				h3{
+					text-align: center;
+					background: @hatenaColor;
+					font-size: @fontSizeNormal;
+					font-weight: bold;
+					line-height: 1;
+					padding: 0.25em 0;
+					border-bottom: 1px solid #FFF;
+					a{
+						color: #FFF;
+						text-decoration: none;
+						&:hover{
+							color: rgba(255, 255, 255, 0.7);
+						}
+						small{
+							padding-left: 0.5em;
+							font-weight: normal;
+							font-size: @fontSizeSmall;
+							text-overflow: ellipsis;
+						}
+					}
+				}
+				.bookmarks{
+					margin-top: @baseMargin / 2;
+					padding: 0 @baseMargin / 2;
+					.item{
+						display: flex;
+						margin-top: @baseMargin / 2;
+						padding-bottom: @baseMargin / 2;
+						border-bottom: @baseBorderStyle;
+						font-size: 13px;
+						line-height:1;
+						&:last-child{
+							border-bottom: none;
+						}
+						.userImage{
+							width: 32px;
+							height:32px;
+							margin-right: 8px;
+							img{
+								border: @baseBorderStyle;
+							}
+						}
+						.userText{
+							line-height: 1.5;
+							.userName{
+								margin-right: 0.5em;
+								text-decoration: none;
+							}
+							.userCommentText{
+								a{
+									color: #222;
+									text-decoration: underline;
+									&:hover{
+										text-decoration: none;
+									}
+								}
+							}
+						}
+						.tags,
+						.footer{
+							font-size: 12px;
+							a{
+								margin-right: 0.5em;
+								text-decoration: none;
+								color: #666;
+								&:last-child{
+									margin-right: 0;
+								}
+								&:hover{
+									text-decoration: underline;
+								}
+							}
+						}
+						.footer{
+							a.permalink{
+								&:before{
+									content: '∞';
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+.about{
+	font-size: @fontSizeNormal;
+	h2{
+		font-size: @fontSizeLarge;
+		border-bottom: 2px solid @hatenaColor;
+		line-height: 1;
+		margin-bottom: @baseMargin / 2;
+		padding-top: @baseMargin / 2;
+		padding-bottom: @baseMargin / 2;
+		&:first-child{
+			padding-top: 0;
+		}
+
+	}
+	p{
+		font-size: @fontSizeSmall;
+	}
+
+}
