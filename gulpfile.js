@@ -72,6 +72,10 @@ function bundleJs(bundler) {
 		.pipe(gulp.dest(js.dest.dir));
 }
 
+gulp.task('apply-prod-environment', function() {
+    process.env.NODE_ENV = 'production';
+});
+
 gulp.task('watchify', function () {
 	var bundler = watchify(
 		browserify(props).transform(babelify, {
@@ -186,6 +190,7 @@ gulp.task('gzipLess', function(){
 gulp.task('buildJS' , function(callback){
 	return runSequence(
 		'cleanJs',
+		'apply-prod-environment',
 		'browserify',
 		'uglify',
 		'gzipJs',
