@@ -1,3 +1,4 @@
+/* global ga */
 import 'lodash';
 import React from 'react';
 import {render} from 'react-dom';
@@ -11,6 +12,17 @@ class App extends React.Component{
 	constructor(props){
 		super(props);
 	}
+	componentDidMount(){
+		this._sendGaPageview();
+	}
+
+	componentDidUpdate(){
+		this._sendGaPageview();
+	}
+	_sendGaPageview(){
+		ga && ga('send', 'pageview', this.props.location.pathname);
+	}
+
 	render(){
 		return(
 			<div className="main">
