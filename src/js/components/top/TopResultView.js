@@ -44,7 +44,9 @@ export default class TopResultView extends React.Component{
 								<span className="count">{this.props.floors[0].count}</span>
 								<span className="users">users</span>
 							</a>
-							<a href={this.props.floors[0].url} target="_blank" className="title">{this.props.floors[0].title}</a>
+							<span className="title">
+								<a href={this.props.floors[0].url} target="_blank">{this.props.floors[0].title}</a>
+							</span>
 						</h2>
 						<div className="area">
 							{this.getAreaText(this.props.floors)}

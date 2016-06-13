@@ -6,6 +6,7 @@
 
 @fontSizeNormal: @baseFontSize;
 @fontSizeSmall: @fontSizeNormal * 0.75;
+@fontSizeXSmall: 10px;
 @fontSizeLarge: @fontSizeNormal * 1.25;
 
 @baseBorderStyle: 1px solid #CCC;
@@ -158,11 +159,13 @@ a{
 			display:flex;
 			margin-bottom: @baseMargin;
 			align-items: center;
+			a{
+				text-decoration: none;
+			}
 			.bookmarkCount,
 			.title{
 				line-height: 1;
 				display: block;
-				text-decoration: none;
 				margin-top: @baseMargin;
 			}
 			.bookmarkCount{
@@ -187,9 +190,11 @@ a{
 				flex: 1 0 auto;
 				line-height: 1.5;
 				font-size: @fontSizeLarge;
-				color: @baseColor;
-				&:hover{
-					color: @titleHoverColor;
+				a{
+					color: @baseColor;
+					&:hover{
+						color: @titleHoverColor;
+					}
 				}
 			}
 		}
@@ -208,26 +213,35 @@ a{
 			border-bottom: 1px solid @hatenaColor;
 			.floor{
 				h3{
+					display:flex;
+					align-items: center;
+					justify-content: center;
 					text-align: center;
 					background: @hatenaColor;
 					font-size: @fontSizeNormal;
 					font-weight: bold;
 					line-height: 1;
-					padding: 0.25em 0;
 					border-bottom: 1px solid #FFF;
-					a{
-						color: #FFF;
-						text-decoration: none;
-						&:hover{
-							color: rgba(255, 255, 255, 0.7);
-						}
-						small{
-							padding-left: 0.5em;
-							font-weight: normal;
-							font-size: @fontSizeSmall;
-							text-overflow: ellipsis;
+					.floorNum{
+						padding: 0.25em 0;
+						a{
+							color: #FFF;
+							text-decoration: none;
+							&:hover{
+								color: rgba(255, 255, 255, 0.7);
+							}
+							.bookmarkCount{
+								vertical-align: middle;
+								height: 100%;
+								font-size: @fontSizeXSmall;
+								color: @bookmarkCountColor;
+								background: @bookmarkCountBg;
+								padding: 0 5px;
+								margin-left: 5px;
+							}
 						}
 					}
+					
 				}
 				.bookmarks{
 					margin-top: @baseMargin / 2;

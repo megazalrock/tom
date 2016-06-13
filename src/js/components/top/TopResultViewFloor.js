@@ -24,7 +24,12 @@ export default class TopResultViewFloor extends React.Component{
 		})();
 		return (
 			<div className="floor">
-				<h3><a href={this.props.data.entry_url} target="_blank" title={this.props.data.title}>{this.props.index + 1}階</a></h3>
+				<h3>
+					<div className="floorNum">
+						<a href={this.props.data.entry_url} target="_blank" title={this.props.data.title}>{this.props.index + 1}階<span className="bookmarkCount">{this.props.data.count}users</span></a>
+					</div>
+					
+				</h3>
 				{Bookmarks}
 			</div>
 		);
