@@ -2,6 +2,7 @@
 import _ from 'lodash';
 import util from '../../util.js';
 import React from 'react';
+import Helmet from 'react-helmet';
 import {browserHistory} from 'react-router';
 import TopInputBox from './TopInputBox.js';
 import TopResultView from './TopResultView.js';
@@ -129,23 +130,22 @@ export default class Top extends React.Component{
 		});
 
 		return _floors;
-
-		/*if(this.state.viewMode === 'comment'){
-			floor.bookmarks = _.filter(floor.bookmarks, (item) => {
-				return item.comment !== '';
-			});
-		}else if(this.state.viewMode === 'idCall'){
-			floor.bookmarks = _.filter(floor.bookmarks , (item) => {
-				return util.idCallRegExp.test(item.comment);
-			});
-		}
-		return floor;*/
 	}
 
-
 	render(){
+		var Title = (() => {
+			var title;
+			if(this.state.floors.length){
+				title = '「' + this.state.floors[0].title + '」のメタブタワー';
+			}
+			return (
+				<Helmet title={util.generatePageTitle(title)} />
+			);
+		})();
+
 		return (
 			<div className="index">
+				{Title}
 				<TopInputBox handleOnSubmit={this.onSubmit.bind(this)} handleOnChangeViewMode={this.onChangeViewMode.bind(this)} viewMode={this.state.viewMode} url={this.state.url} isLoading={this.state.isLoading}/>
 				<TopResultView floors={this.state.floors} viewMode={this.state.viewMode}/>
 			</div>
